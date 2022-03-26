@@ -12,8 +12,9 @@
     INDEX <br>
     {% for columns in dataTestRun %}
         <!-- {{columns.id}} (MERGE DAR INCERC HREF) -->
-        <a href="/webapp/{{columns.id}}">{{columns.id}}</a>
-        <br>
+        <ul>
+            <a href="/webapp/logs/{{columns.id}}">{{columns.id}}</a>
+        </ul>
     {% endfor %}
 </body>
 </html>
