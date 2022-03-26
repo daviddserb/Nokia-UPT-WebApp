@@ -7,16 +7,14 @@ import os, re, sqlite3
 from webapp.models import TestRun, TestCaseRun
 
 def index(request):
-    print("def index(request)")
     folder_to_view = "webapp/logs"
     keywords = ["| PASS |", "| FAIL |"]
     
     for file_name in os.listdir(folder_to_view):
         if file_name.endswith(".txt"):
-            print(file_name)
-            print(file_name.rpartition('.'))
+            # print(file_name)
             id_notepad = file_name.rpartition('.')[0] #pt. baza de date
-            print(id_notepad)
+            # print(id_notepad)
 
             insertInTable_TestRun = TestRun(
                 id = id_notepad
@@ -48,28 +46,15 @@ def index(request):
                         insertInTable_TestCaseRun.save()
                         """
 
-    print("#########################")
-    print(TestCaseRun.objects.all())
-    print("-------------------------")
-    print(TestRun.objects.all())
-    print(TestRun.objects.all().values_list())
-    print(TestRun.objects.all()[0])
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~")
-    #print(TestCaseRun.id)
-    #print(TestCaseRun.id)
-    #print(TestCaseRun.case_name)
+    dataFromTableTestRun = TestRun.objects.all()
+    return render(request, 'webapp/index.html', {'dataTestRun' : dataFromTableTestRun})
 
-    dataTestRun = TestRun.objects.all()
-    # data from DB
-    # context = {TestRun.objects.get}
-    # print("context:")
-    # print(context)
-    return render(request, 'webapp/index.html', {'idTestRun' : dataTestRun})
+def testRunDetails(request, notepad_id):
+    dataFromTableTestCaseRun = TestCaseRun.objects.all()
+    return render(request, 'webapp/details.html', {'dataTestCaseRun' : dataFromTableTestCaseRun})
 
-#pt. testing
-def detail(request, question_id):
-    return HttpResponse("You're looking at question %s." % question_id)
 
+# pt. testing
 def results(request, question_id):
     response = "You're looking at the results of question %s."
     return HttpResponse(response % question_id)

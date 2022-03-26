@@ -1,8 +1,8 @@
+/mysite
 /myvenv
-/db.sqlite3
 
 /webapp/logs
 /webapp/migrations
 /webapp/__pycache__
 
-/mysite
+/db.sqlite3

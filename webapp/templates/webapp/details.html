@@ -3,17 +3,17 @@
 <head>
     <!-- <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'> -->
-    <title>INDEXES</title>
+    <title>INDEXES DETAILS</title>
     <!-- <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script> -->
 </head>
 <body>
-    INDEX <br>
-    {% for columns in dataTestRun %}
-        <!-- {{columns.id}} (MERGE DAR INCERC HREF) -->
-        <a href="/webapp/{{columns.id}}">{{columns.id}}</a>
-        <br>
+    DETAILS<br>
+    {% for columns in dataTestCaseRun %}
+        <ul>
+            {{columns.id}}. {{columns.case_name}} - {{columns.status}} - {{columns.execution_time}}
+        </ul>
     {% endfor %}
 </body>
 </html>
