@@ -11,9 +11,11 @@
 <body>
     DETAILS<br>
     {% for columns in dataTestCaseRun %}
-        <ul>
-            {{columns.id}}. {{columns.case_name}} - {{columns.status}} - {{columns.execution_time}}
-        </ul>
+        {% if notepadId == columns.test_run.id %}
+            <ul>
+                {{columns.id}}. {{columns.case_name}} - {{columns.status}} - {{columns.execution_time}}
+            </ul>
+        {% endif %}
     {% endfor %}
 </body>
 </html>

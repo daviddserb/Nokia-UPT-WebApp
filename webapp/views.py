@@ -12,9 +12,9 @@ def index(request):
     
     for file_name in os.listdir(folder_to_view):
         if file_name.endswith(".txt"):
-            # print(file_name)
+            print(file_name)
             id_notepad = file_name.rpartition('.')[0] #pt. baza de date
-            # print(id_notepad)
+            print(id_notepad)
 
             insertInTable_TestRun = TestRun(
                 id = id_notepad
@@ -47,11 +47,13 @@ def index(request):
                         """
 
     dataFromTableTestRun = TestRun.objects.all()
+    print(dataFromTableTestRun)
     return render(request, 'webapp/index.html', {'dataTestRun' : dataFromTableTestRun})
 
 def testRunDetails(request, notepad_id):
     dataFromTableTestCaseRun = TestCaseRun.objects.all()
-    return render(request, 'webapp/details.html', {'dataTestCaseRun' : dataFromTableTestCaseRun})
+    print(dataFromTableTestCaseRun)
+    return render(request, 'webapp/details.html', {'dataTestCaseRun' : dataFromTableTestCaseRun, 'notepadId' : notepad_id})
 
 
 # pt. testing

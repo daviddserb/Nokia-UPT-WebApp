@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     # pot sa pui ce path vrei
+    #path simplu pt webapp
     path('logs', views.index, name='index'),
     path('logs/<int:notepad_id>', views.testRunDetails, name='testRunDetails'),
 
