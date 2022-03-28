@@ -1,21 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'> -->
-    <title>INDEXES DETAILS</title>
-    <!-- <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <title>NOTEPAD DETAILS</title>
 </head>
 <body>
-    DETAILS<br>
-    {% for columns in dataTestCaseRun %}
-        {% if notepadId == columns.test_run.id %}
-            <ul>
-                {{columns.id}}. {{columns.case_name}} - {{columns.status}} - {{columns.execution_time}}
-            </ul>
-        {% endif %}
-    {% endfor %}
+    <br>
+    <div class="container-fluid">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Case Name</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Execution Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for columns in dataSelectedTable %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ columns.case_name }}</td>
+                        <td>{{ columns.status }}</td>
+                        <td>{{ columns.execution_time }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
