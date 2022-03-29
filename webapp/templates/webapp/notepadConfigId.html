@@ -1,0 +1,20 @@
+{% extends 'webapp/base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>NOTEPAD CONFIG IDS</title>
+    </head>
+    <body>
+        {% block content %}
+            <div class="container w-50">
+                <ul class="list-group">
+                    <li class="list-group-item active text-center font-weight-bold">Config ids</li>
+                    {% for columns in dataTestLine %}
+                        <li class="list-group-item">{{ forloop.counter }}.<a href="/webapp/config-id/{{columns.id}}">{{columns.id}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endblock %}
+    </body>
+</html>

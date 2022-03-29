@@ -1,0 +1,38 @@
+{% extends 'webapp/base.html' %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>NOTEPAD DETAILS</title>
+    </head>
+    <body>
+        {% block content %}
+            <div class="container-fluid">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Case Name</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Execution Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for columns in dataTestCaseRun %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{{ columns.case_name }}</td>
+                                {% if columns.status == "FAIL" %}
+                                <td><font color="red">{{ columns.status }}</td></font>
+                                {% else %}
+                                    <td><font color="green">{{ columns.status }}</td></font>
+                                {% endif %}
+                                <td>{{ columns.execution_time }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endblock %}
+    </body>
+</html>

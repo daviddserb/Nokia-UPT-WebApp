@@ -1,0 +1,23 @@
+{% extends 'webapp/base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Homepage</title>
+    </head>
+    <body>
+        {% block content %}
+            <nav class="navbar navbar-dark bg-dark">
+                <form action="/your-name/" method="post">
+                    <input type="submit" value="Register">
+                </form>
+
+                <form action="/your-name/" method="post">
+                    <input type="submit" value="Log in">
+                </form>
+                
+                <a class="nav-link" href="#">Notepad Details</a>
+              </nav>
+        {% endblock %}
+    </body>
+</html>
