@@ -7,17 +7,19 @@
     </head>
     <body>
         {% block content %}
-            <nav class="navbar navbar-dark bg-dark">
-                <form action="/your-name/" method="post">
-                    <input type="submit" value="Register">
-                </form>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <!-- "/webapp/config-id" == "config-id" == {% url 'notepad_config_id' %} (better)-->
+                <a class="navbar-brand" href="config-id">Notepad Details</a>
 
-                <form action="/your-name/" method="post">
-                    <input type="submit" value="Log in">
-                </form>
-                
-                <a class="nav-link" href="#">Notepad Details</a>
-              </nav>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="register">Register</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="login">Login</a>
+                    </li>
+                </ul>
+            </nav>
         {% endblock %}
     </body>
 </html>

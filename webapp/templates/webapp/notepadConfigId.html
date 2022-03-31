@@ -11,7 +11,9 @@
                 <ul class="list-group">
                     <li class="list-group-item active text-center font-weight-bold">Config ids</li>
                     {% for columns in dataTestLine %}
-                        <li class="list-group-item">{{ forloop.counter }}.<a href="/webapp/config-id/{{columns.id}}">{{columns.id}}</a></li>
+                        <!-- href="{{columns.id}} (merge) {% url 'id_notepad' %} (nu merge)-->
+                        <li class="list-group-item">{{ forloop.counter }}. <a href="{{columns.id}}">{{columns.id}}</a></li>
+                        <!-- sa fac un Add to favorites href -->
                     {% endfor %}
                 </ul>
             </div>
