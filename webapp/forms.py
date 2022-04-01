@@ -4,13 +4,11 @@ from django.contrib.auth.models import User
 
 """
 forms.Form
--> sunt configurate de mine.
--> sunt de preferat sa fie folosite cand NU interactioneaza cu models (baza de date).
--> ex. un formular de contact/abonare la newsletter, in care s-ar putea sa nu trebuiasca
-sa interctionezi neaparat cu baza de date.
+-> trebuie sa fie configurat de mine (adica sa declar ce vreau la input)
+-> sunt folosite, de preferat, cand NU interactioneaza cu models (baza de date).
 
 forms.ModelForm
--> va fi creat automat și apoi poate fi modificat de dvs.
+-> este deja configurat dar poate fi modificat dupa preferinte de mine.
 
 UserCreationForm
 -> este folosit pt. a crea noi useri care pot folosi aplicatia.
@@ -19,15 +17,20 @@ UserCreationForm
 class Meta
 """
 
+
 class NameForm(forms.Form):
     print("se intra in NameForm")
     your_name = forms.CharField(label='Your name', max_length=100)
+    title = forms.CharField()
+    description = forms.CharField()
+    price = forms.DecimalField()
+
 
 class RegisterUserForm(UserCreationForm):
     print("$$$ forms.py/CreateUserForm $$$")
+
     # class Meta gives us a nested namespaces for configurations and keeps the configurations in one place and within the configuration we are saying that the model that will be affected is the User model (because model = User)
     class Meta:
         print("Meta")
         model = User
         fields = ['username', 'email', 'password1', 'password2']
-        
