@@ -13,7 +13,7 @@
                 {% for columns in dataTestLine %}
                     <!--"{{columns.id}}", -->
                     <li class="list-group-item"> {{forloop.counter}}. <a href="{% url 'id_notepad' columns.id %}">{{columns.id}}</a></li>
-                    <!-- sa fac un Add to favorites href -->
+                    <!-- sa fac un form (cred) sau href cu 'Add to favorites' -->
                 {% endfor %}
             </ul>
         </div>

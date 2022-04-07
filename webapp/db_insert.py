@@ -1,6 +1,5 @@
 import os
 import re
-
 from webapp.models import TestLine, TestRun, TestCaseRun
 
 def insert_db():
@@ -9,7 +8,7 @@ def insert_db():
     keyword = [" -v CONFIGURATION"]
 
     for file_name in os.listdir(folder_to_view):
-            # if file_name.endswith(".txt"): (extra, daca o sa am nevoie)
+            # if file_name.endswith(".txt"): # extra, daca o sa am nevoie
             #print(file_name)
             notepad_id = file_name.rpartition('.')[0]
             #print(notepad_id)

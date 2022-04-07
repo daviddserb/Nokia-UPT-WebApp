@@ -1,54 +1,40 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages  # pop-up messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User  # db.sqlite3/quth_user
 
-from webapp.models import Users, TestLine, TestRun, TestCaseRun
+from webapp.models import TestLine, TestRun, TestCaseRun
 from .forms import *
 
-def homepage(request):
-    return render(request, 'webapp/homepage.html')
+def home(request):
+    return render(request, 'webapp/home.html')
 
 def register(request):
-
+    # form = RegisterUserForm(None or request.POST)
     form = RegisterUserForm()
     if request.method == 'POST':
-        form = RegisterUserForm(request.POST) # create a new form that has the data from the request.post (from the web form)
+        form = RegisterUserForm(request.POST) # create a new form that has the data from the html form post request
+        print('form')
+        print(form)
         
         # verifica daca fiecare camp din form este valid, pentru clasa Django Form. Daca datele sunt valide, se salveaza in atributul cleaned_data
         if form.is_valid():
-            """INTREBARE:
-            nu am prea inteles ce face
-            nu imi afecteaza salvara in baza de date
-            dar am vazut ca pe ruta de /admin, la Useri, nu vad cel care s-a inregistrat, daca nu am form.save()"""
+            # save user in the django database (auth_user)
             form.save()
 
-            #get data from the html
+            # get user input from the html form
             username = form.cleaned_data['username']
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password1']
 
-            #save in database like this (I have to try)
-            # register = Users.objects.create(username=username, email=email, password=password)
-            # trebuie cumva sa il si salvez...?
-            # register.save() #(cred)
-
-            #save data in database
-            Users_insert = Users(
-                username = username,
-                email = email,
-                password = password,
-                )
-            Users_insert.save()
-
+            # pop-up message
             messages.success(request, f"Account successfully created for '{username}'!")
-            #types of messages: .debug/info/success/warning/error
+            # types of messages: .debug/info/success/warning/error
 
-            return redirect('homepage')
+            return redirect('login_user')
 
     context = {'form':form}
     return render(request, 'webapp/register.html', context)
 
-def loginUser(request):
+def login_user(request):
     if request.method == 'POST':
         
         #get data from html
@@ -67,8 +53,17 @@ def loginUser(request):
     return render(request, 'webapp/login.html')
 
 def userProfile(request):
-    print("############### userProfile()                       #######################")
-    return render(request, 'webapp/userProfile.html')
+
+    print(request.user)
+    # get the logged in username
+    loggedInUserName = request.user
+    print(loggedInUserName)
+    # get the logged in user's info from the database
+    userInfo = User.objects.filter(username = loggedInUserName)
+    print(userInfo)
+
+    context = {'userName' : loggedInUserName}
+    return render(request, 'webapp/userProfile.html', context)
 
 def notepad_config_id(request):
     print("############################### SE INTRA IN NOTEPAD_CONFIG_ID")

@@ -2,15 +2,6 @@ from django.db import models
 
 # models.Model = clasa trebuie salvata in baza de date
 
-
-class Users(models.Model):
-    id = models.IntegerField(primary_key=True)  # contor
-    username = models.CharField(max_length=30)
-    email = models.CharField(max_length=40)
-    password = models.CharField(max_length=50)
-    # test_line = models.ManyToManyField(TestLine) #cum fac aici?
-
-
 class TestLine(models.Model):
     id = models.IntegerField(primary_key=True)  # id-ul din notepad, de dupa '-v REGISTER'
 
