@@ -4,7 +4,7 @@ from django.db import models
 
 class TestLine(models.Model):
     id = models.IntegerField(primary_key=True)  # id-ul din notepad, de dupa '-v REGISTER'
-
+    # manytomany
 
 class TestRun(models.Model):
     id = models.IntegerField(primary_key=True)  # id-ul de la numele notepad-ului

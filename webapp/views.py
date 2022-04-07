@@ -37,13 +37,13 @@ def register(request):
 def login_user(request):
     if request.method == 'POST':
         
-        #get data from html
+        # get data from html
         username = request.POST.get('username')
         password = request.POST.get('password')
 
         user = authenticate(request, username = username, password = password)
 
-        #check if the user is in the database
+        # check if the user is in the database
         if user is not None:
             login(request, user)
             return redirect('/webapp/profile')
@@ -55,11 +55,16 @@ def login_user(request):
 def userProfile(request):
 
     print(request.user)
+
     # get the logged in username
     loggedInUserName = request.user
-    print(loggedInUserName)
-    # get the logged in user's info from the database
+
+    # get the logged in user's info from the database (it's printing just the name because of the in-built function BUT you can acces all the info)
     userInfo = User.objects.filter(username = loggedInUserName)
+    # Intrebare, cum sa fac cu userInfo, sa ii extrag email-ul de ex.
+    # am incercat userInfo.email dar nu merge
+    # sau cum sa pun intrebarea pe google...?
+    print("userInfo:")
     print(userInfo)
 
     context = {'userName' : loggedInUserName}
@@ -74,10 +79,11 @@ def id_notepad(request, notepad_config_id):
     TestRun_data = TestRun.objects.filter(test_line = notepad_config_id)
     return render(request, 'webapp/notepadId.html', {'dataTestRun' : TestRun_data, 'notepad_config_id' : notepad_config_id})
 
-#! (cred) ordinea parametrilor NU conteaza, ci trebuie sa aiba aceleasi denumiri cu cele din path si sa fie in acelasi numar
-# def notepad_details(request, notepad_config_id, notepad_id):
+# ordinea parametrilor nu conteaza, ci trebuie sa aiba aceleasi denumiri cu cele din path si sa fie in acelasi numar
 def notepad_details(request, notepad_config_id, notepad_id):
-    #print(notepad_config_id)
-    #print(notepad_id)
+    print("notepad_config_id:")
+    print(notepad_config_id)
+    print("notepad_id:")
+    print(notepad_id)
     TestCaseRun_data = TestCaseRun.objects.filter(test_run = notepad_id) #select the data from the table where each test_run has the id of the notepad
     return render(request, 'webapp/notepadDetails.html', {'dataTestCaseRun' : TestCaseRun_data})
