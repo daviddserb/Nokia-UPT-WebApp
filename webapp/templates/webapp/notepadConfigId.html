@@ -11,9 +11,12 @@
             <ul class="list-group">
                 <li class="list-group-item active text-center font-weight-bold">Config ids</li>
                 {% for columns in dataTestLine %}
-                    <!--"{{columns.id}}", -->
-                    <li class="list-group-item"> {{forloop.counter}}. <a href="{% url 'id_notepad' columns.id %}">{{columns.id}}</a></li>
-                    <!-- sa fac un form (cred) sau href cu 'Add to favorites' -->
+                    <li class="list-group-item"> {{forloop.counter}}. <a href="{% url 'id_notepad' columns.id %}">{{columns.id}}</a>
+                        <br>
+                        {% if userName != "AnonymousUser" %}
+                            <a href="{% url 'add_to_favorites' columns.id %}">Add to favorites</a>
+                        {% endif %}
+                    </li>
                 {% endfor %}
             </ul>
         </div>

@@ -1,10 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # models.Model = clasa trebuie salvata in baza de date
 
 class TestLine(models.Model):
     id = models.IntegerField(primary_key=True)  # id-ul din notepad, de dupa '-v REGISTER'
-    # manytomany
+    users = models.ManyToManyField(User)
 
 class TestRun(models.Model):
     id = models.IntegerField(primary_key=True)  # id-ul de la numele notepad-ului
