@@ -7,16 +7,7 @@
     </head>
     <body>
         {% block content %}
-            {{userInfo}}
-            <br>
-            {{userInfo.username}} <!-- NU MERGE, DE CE?-->
-            <br>
-            {% for obj in userInfo %} 
-                {{obj.username}}'s profile page
-            {% endfor %}
-            <!-- why not like this: {{userInfo.username}}?
-            do I really need to make a for?
-            -->
+            {{userInfo.username}}'s profile page
             <br>
             <span><a href="{% url 'logout' %}">Logout</a></span>
             <br>

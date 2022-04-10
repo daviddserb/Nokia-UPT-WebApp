@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User  # db.sqlite3/quth_user
 
 from webapp.models import TestLine, TestRun, TestCaseRun
-from .forms import *
+from .forms import RegisterUserForm
 
 def home(request):
     return render(request, 'webapp/home.html')
@@ -55,26 +55,32 @@ def logout_user(request):
     return redirect('home')
 
 def user_profile(request):
-    # get the logged in username
-    loggedInUserName = request.user
-
-    # get the logged in user's info from the database (it's printing just the name because of the in-built function BUT you can acces all the info)
-    userInfo = User.objects.filter(username = loggedInUserName)
-    print("userInfo:")
-    print(userInfo)
-    print("-")
-    print(userInfo.values())
-    print("-")
-    print(userInfo.values('id', 'username', 'email'))
-
-    context = {'userInfo' : userInfo.values()}
+    print("! user_profile !")
+    context = {'userInfo' : request.user}
     return render(request, 'webapp/userProfile.html', context)
 
 def favorites(request):
     print("@ favorites @")
+    favorites_id = TestLine.objects.filter(users = request.user)
+    print("toate id-urile adaugate la favorite de user-ul logat")
+    print(favorites_id)
 
-    context = {}
+    context = {'favs_id' : favorites_id}
     return render(request, 'webapp/favorites.html', context)
+
+def deleteId(request, notepad_config_id):
+    print(" @ deleteId @")
+    """
+    many to many field instance: NameTableWithManyToManyField.NameReferencedTable
+    intermediary table model: NameTableWithManyToManyField.NameReferencedTable.through
+    intermediary model manager: NameTableWithManyToManyField.NameReferencedTable.through.objects
+    return a queryset for all intermediary models: NameTableWithManyToManyField.NameReferencedTable.through.objects.all()
+    """
+
+    select = TestLine.users.through.objects.filter(testline_id = notepad_config_id, user_id = request.user.id)
+    select.delete()
+    
+    return redirect('favorites')
 
 
 def notepad_config_id(request):
@@ -85,20 +91,20 @@ def notepad_config_id(request):
     return render(request, 'webapp/notepadConfigId.html', context)
 
 def add_to_favorites(request, notepad_config_id):
-    print("############ add_to_favorites")
-    print("notepad_config_id:")
-    print(notepad_config_id)
-    print("request.user")
-    print(request.user)
+    print("# add_to_favorites #")
 
-    # instantiate the class
+    # INTREBARE: aparent merge dar nu-mi dau seama exact unde se intampla fiecare bucata din logica.
     testline = TestLine.objects.get(id = notepad_config_id)
-    # filter() returns a QuerySet even if only one object is found. To return just a model instance use get().
-    print("testline:")
+    # filter() - returns a QuerySet even if only one object is found.
+    # get() - returns just one single model instance.
+    print("id-ul care a fost adaugat la favorite de catre user-ul logat:")
     print(testline)
+
     testline.users.add(request.user)
-    testline.save()
-    print("testline.users.all()")
+    # INTREBARE: nu-mi dau seama ce face save(), cu/fara tot aia e.
+    # testline.save()
+
+    print("toti userii care au adaugat la favorite id-ul respectiv:")
     print(testline.users.all())
 
     return redirect('favorites')

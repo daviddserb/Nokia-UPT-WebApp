@@ -7,8 +7,13 @@
     </head>
     <body>
         {% block content %}
-        favorites
-        <br>
+            {{request.user}}'s favorite ids
+            <br>
+            {% for id in favs_id %}
+                <li class="list-group-item"> {{forloop.counter}}. <a href="{% url 'id_notepad' id.id %}">{{id.id}}</a>
+                    <a href="{% url 'deleteId' id.id %}">Delete</a>
+                </li>
+            {% endfor %}
         {% endblock %}
     </body>
 </html>
