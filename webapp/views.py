@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages  # pop-up messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User  # db.sqlite3/quth_user
+from django.http import HttpResponseNotFound
 
-from webapp.models import TestLine, TestRun, TestCaseRun
+from webapp.models import TestLine, TestRun, TestCase
 from .forms import RegisterUserForm
 
 def home(request):
@@ -61,12 +61,13 @@ def user_profile(request):
 
 def favorites(request):
     print("@ favorites @")
+
     favorites_id = TestLine.objects.filter(users = request.user)
     print("toate id-urile adaugate la favorite de user-ul logat")
     print(favorites_id)
 
     context = {'favs_id' : favorites_id}
-    return render(request, 'webapp/favorites.html', context)
+    return render(request, 'webapp/favoritesTestLine.html', context)
 
 def deleteId(request, notepad_config_id):
     print(" @ deleteId @")
@@ -80,15 +81,16 @@ def deleteId(request, notepad_config_id):
     select = TestLine.users.through.objects.filter(testline_id = notepad_config_id, user_id = request.user.id)
     select.delete()
     
-    return redirect('favorites')
+    return redirect('favoritesTestLine')
 
 
 def notepad_config_id(request):
-    print("request.user:")
-    print(request.user)
+    print("! notepad_config_id !")
+
     TestLine_data = TestLine.objects.all()
+
     context = {'dataTestLine' : TestLine_data, 'userName' : str(request.user)}
-    return render(request, 'webapp/notepadConfigId.html', context)
+    return render(request, 'webapp/TestLine.html', context)
 
 def add_to_favorites(request, notepad_config_id):
     print("# add_to_favorites #")
@@ -107,18 +109,33 @@ def add_to_favorites(request, notepad_config_id):
     print("toti userii care au adaugat la favorite id-ul respectiv:")
     print(testline.users.all())
 
-    return redirect('favorites')
+    return redirect('favoritesTestLine')
 
 
 def id_notepad(request, notepad_config_id):
-    TestRun_data = TestRun.objects.filter(test_line = notepad_config_id)
-    return render(request, 'webapp/notepadId.html', {'dataTestRun' : TestRun_data, 'notepad_config_id' : notepad_config_id})
+    print("( id_notepad )")
+
+    # when the user tries manually to put a random number in the path of the page
+    if not TestLine.objects.filter(id = notepad_config_id).exists():
+        return HttpResponseNotFound("THIS ID DOES NOT EXIST")
+
+    TestRun_filtered_data = TestRun.objects.filter(test_line = notepad_config_id)
+
+    return render(request, 'webapp/TestRun.html', {'TestRun_filtered_data' : TestRun_filtered_data, 'notepad_config_id' : notepad_config_id})
 
 # ordinea parametrilor nu conteaza, ci trebuie sa aiba aceleasi denumiri cu cele din path si sa fie in acelasi numar
 def notepad_details(request, notepad_config_id, notepad_id):
+    print("* notepad_details *")
+
     print("notepad_config_id:")
     print(notepad_config_id)
     print("notepad_id:")
     print(notepad_id)
-    TestCaseRun_data = TestCaseRun.objects.filter(test_run = notepad_id)  # select the data from the table where each test_run has the id of the notepad
-    return render(request, 'webapp/notepadDetails.html', {'dataTestCaseRun' : TestCaseRun_data})
+
+    # when the user tries manually to put a random number in the path of the page
+    if not TestRun.objects.filter(id = notepad_id).exists():
+        print("NU EXISTA")
+        return HttpResponseNotFound("THIS ID DOES NOT EXIST")
+
+    TestCase_data = TestCase.objects.filter(test_run = notepad_id)  # select the data from the table where each test_run has the id of the notepad
+    return render(request, 'webapp/TestCase.html', {'dataTestCase' : TestCase_data})

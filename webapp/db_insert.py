@@ -1,6 +1,6 @@
 import os
 import re
-from webapp.models import TestLine, TestRun, TestCaseRun
+from webapp.models import TestLine, TestRun, TestCase
 
 def insert_db():
     folder_to_view = "webapp/logs"
@@ -41,11 +41,11 @@ def insert_db():
         TestRun_insert.save()
 
         for i in range(len(notepad_line_status)):
-            TestCaseRun_insert = TestCaseRun(
+            TestCase_insert = TestCase(
                 status = notepad_line_status[i],
                 case_name = notepad_line_name[i],
                 execution_time = notepad_line_date[i],
                 test_run = TestRun.objects.get(id = id_notepad)
                 )
             # INTREBARE: trebuie sa fac save() oare la fiecare save sau pot la finalul parcurgerii?
-            TestCaseRun_insert.save()
+            TestCase_insert.save()
