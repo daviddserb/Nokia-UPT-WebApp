@@ -9,9 +9,11 @@
         {% block content %}
             <div class="container w-50">
                 <ul class="list-group">
-                    <li class="list-group-item active text-center font-weight-bold">Notepad ids</li>
+                    <li class="list-group-item active text-center font-weight-bold">Testrun ids</li>
                     {% for columns in TestRun_filtered_data %}
-                        <li class="list-group-item">{{ forloop.counter }}. <a href="{% url 'notepad_details' notepad_config_id columns.id%}">{{columns.id}}</a></li>
+                        <li class="list-group-item">{{ forloop.counter }}.
+                            <a href="{% url 'notepad_details' notepad_config_id columns.id%}">{{ columns.id }}</a>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>

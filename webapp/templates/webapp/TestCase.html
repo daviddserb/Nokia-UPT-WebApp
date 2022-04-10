@@ -18,15 +18,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for columns in dataTestCaseRun %}
+                        {% for columns in dataTestCase %}
                             <tr>
                                 <th scope="row">{{ forloop.counter }}</th>
                                 <td>{{ columns.case_name }}</td>
+
                                 {% if columns.status == "FAIL" %}
-                                <td><font color="red">{{ columns.status }}</td></font>
+                                    <td><font color="red">{{ columns.status }}</td></font>
                                 {% else %}
                                     <td><font color="green">{{ columns.status }}</td></font>
                                 {% endif %}
+                                
                                 <td>{{ columns.execution_time }}</td>
                             </tr>
                         {% endfor %}

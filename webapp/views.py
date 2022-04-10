@@ -59,7 +59,7 @@ def user_profile(request):
     context = {'userInfo' : request.user}
     return render(request, 'webapp/userProfile.html', context)
 
-def favorites(request):
+def favorites_TestLine(request):
     print("@ favorites @")
 
     favorites_id = TestLine.objects.filter(users = request.user)
@@ -69,8 +69,8 @@ def favorites(request):
     context = {'favs_id' : favorites_id}
     return render(request, 'webapp/favoritesTestLine.html', context)
 
-def deleteId(request, notepad_config_id):
-    print(" @ deleteId @")
+def delete_favorites_TestLine(request, notepad_config_id):
+    print(" @ delete_favorites_TestLine @")
     """
     many to many field instance: NameTableWithManyToManyField.NameReferencedTable
     intermediary table model: NameTableWithManyToManyField.NameReferencedTable.through
@@ -86,6 +86,8 @@ def deleteId(request, notepad_config_id):
 
 def notepad_config_id(request):
     print("! notepad_config_id !")
+    print("numele user-ului:")
+    print(request.user)
 
     TestLine_data = TestLine.objects.all()
 
