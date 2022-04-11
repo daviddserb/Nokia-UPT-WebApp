@@ -47,5 +47,4 @@ def insert_db():
                 execution_time = notepad_line_date[i],
                 test_run = TestRun.objects.get(id = id_notepad)
                 )
-            # INTREBARE: trebuie sa fac save() oare la fiecare save sau pot la finalul parcurgerii?
             TestCase_insert.save()

@@ -62,6 +62,7 @@ def user_profile(request):
 def favorites_TestLine(request):
     print("@ favorites @")
 
+    #filtrez din interm dar extrag di ntestline
     favorites_id = TestLine.objects.filter(users = request.user)
     print("toate id-urile adaugate la favorite de user-ul logat")
     print(favorites_id)
@@ -78,8 +79,10 @@ def delete_favorites_TestLine(request, notepad_config_id):
     return a queryset for all intermediary models: NameTableWithManyToManyField.NameReferencedTable.through.objects.all()
     """
 
-    select = TestLine.users.through.objects.filter(testline_id = notepad_config_id, user_id = request.user.id)
-    select.delete()
+    #select = TestLine.users.through.objects.filter(testline_id = notepad_config_id, user_id = request.user.id)
+    testline = TestLine.objects.filter(id = notepad_config_id).first()
+    testline.users.remove(request.user)
+    #select.delete()
     
     return redirect('favorites')
 
@@ -105,8 +108,6 @@ def add_favorites_TestLine(request, notepad_config_id):
 
     # INTREBARE: aparent merge dar nu-mi dau seama exact unde se intampla fiecare bucata din logica.
     testline.users.add(request.user)
-    # INTREBARE: nu-mi dau seama ce face save(), cu/fara tot aia e.
-    # testline.save()
 
     print("toti userii care au adaugat la favorite id-ul respectiv:")
     print(testline.users.all())

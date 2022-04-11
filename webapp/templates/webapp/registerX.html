@@ -1,0 +1,103 @@
+{% extends 'webapp/base.html' %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+
+    <title>Nokia - WebApp UPT Dashboard</title>
+</head>
+
+<body>
+    {% block content %}
+        <div class="container">
+            <!-- SIDEBAR FOR VERTICAL NAVBAR-->
+            <aside>
+                <div class="top">
+                    <div class="logo">
+                        <img src="../images/logo.png">
+                        <h2>WebApp<span class="danger">UPT</span></h2>
+                    </div>
+                    <div class="close" id="close-btn">
+                        <span class="material-icons-sharp">close</span>
+                    </div>
+                </div>
+                <!-- ELEMENTS NAVBAR-->
+                <div class="sidebar">
+                    <a href="testcase.html">
+                        <span class="material-icons-sharp">assessment</span>
+                        <h3>TestCase</h3>
+                    </a>
+                    <a href="signup.html" class="active">
+                        <span class="material-icons-sharp">how_to_reg</span>
+                        <h3>Register</h3>
+                    </a>
+                    <a href="login.html">
+                        <span class="material-icons-sharp">account_circle</span>
+                        <h3>Login</h3>
+                    </a>
+                    <a href="updates.html">
+                        <span class="material-icons-sharp">update</span>
+                        <h3>Updates</h3>
+                    </a>
+                    <!-- MEMBERS LOGIN -->
+                    <a href="#!">
+                        <span class="material-icons-sharp">logout</span>
+                        <h3>Logout</h3>
+                    </a>
+                </div>
+            </aside>
+            <main>
+                <h1>Page SignUp</h1>
+
+                <div class="date">
+                    <p>This page loaded in <span id="loadtime"></span></p>.
+                </div>
+                <div class="login-user">
+                    <span class="material-icons-sharp">how_to_reg</span>
+                    <h2>Create an account</h2>
+                    <div class="account-dialog">
+                <div class="card-header bg-primary text-white"> Please sign in </div>
+                    </div>
+                <form id="login" method="get" >    
+                    <label><b>User Name     
+                    </b>    
+                    </label>    
+                    <input type="text" name="Uname" id="Uname" placeholder="Username">    
+                    <br><br>    
+                    <label><b>Password     
+                    </b>    
+                    </label>    
+                    <input type="Password" name="Pass" id="Pass" placeholder="Password">    
+                    <br><br>    
+                    <input type="button" name="log" id="log" value="Sign up">       
+                    <br><br>       
+                    <a href="login.html">Already have an account?</a>    
+        </form>
+                </div>
+            </main>
+
+            <div class="right">
+                <div class="top">
+                    <button id="menu-btn">
+                        <span class="material-icons-sharp">menu</span>
+                    </button>
+                    <div class="theme-toggler">
+                    <span class="material-icons-sharp active">light_mode</span> 
+                        <span class="material-icons-sharp">dark_mode</span> 
+                    </div>
+                    <div class="profile">
+                        <div class="info">
+                            <p> Hey, <b> Valentin </b></p>
+                            <small class="danger">User</small>
+                        <div>                  
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% block content %}
+</body>
+</html>

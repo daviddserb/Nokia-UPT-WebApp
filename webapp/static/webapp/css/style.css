@@ -1,0 +1,358 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+/* ---- ROOT VARIABLES ---- */
+
+:root {
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --dark: #363949;
+  --white: #fff;
+  --dark-info: #7d8da1;
+  --color-light: rgba(132, 139, 200, 0.18);
+  --primary: #7380ec;
+  --color-dark-variant: #677483;
+  --color-background: #f6f6f9;
+  --color-primary:#7380ec;
+  --color-primary-variant:#111e88;
+  --border-radius-1: 0.4rem; 
+  --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+/* ---- CSS VARIABLES AND GENERAL STYLES ---- */
+
+*{
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  appearance: none;
+  border: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+html{
+  font-size: 14px;
+}
+
+body{
+  width: 100vw;
+  height: 100vh;
+  font-family: Poppins, sans-serif;
+  font-size: 0.88rem;
+  background: #f6f6f9;
+  user-select: none;
+  overflow-x: hidden;
+}
+
+.container{
+  display: grid;
+  width: 96%;
+  margin: 0 auto;
+ /* background: red; */
+  gap: 1.8rem;
+  grid-template-columns: 14rem auto 23rem;
+}
+
+a{
+  color: #363949;
+}
+
+img{
+  display: block;
+  width: 100%;
+}
+
+h1{
+  font-weight: 800;
+  font-size: 1.8rem;
+}
+
+h2{
+  font-size: 1.4rem;
+}
+
+h3{
+  font-size: 0.87rem;
+}
+
+h4{
+  font-size: 0.8rem;
+}
+
+h5{
+  font-size: 0.77rem;
+}
+
+p{
+  color: #677483;
+}
+
+b{
+  color: #363949;
+}
+
+.primary{
+  color: #111e88;
+}
+
+.danger{
+  color: #111e88;
+}
+
+.text-muted {
+  color: #7d8da1
+}
+
+
+/* ---- ASIDE ---- */
+
+aside {
+  height: 100vh;
+  /* background: gray; */
+}
+
+aside .top{
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.4rem;
+}
+
+aside .close{
+  display: none;
+}
+
+aside .logo img{
+  width: 3rem;
+  height: 2rem;
+}
+
+aside .logo{
+  display: flex;
+  gap: 0.2rem;
+}
+
+/* ---- SIDEBAR ---- */
+
+aside .sidebar{
+  background: white;
+  display: flex;
+  flex-direction: column;
+  height: 86vh;
+  position: relative;
+  top: 3rem;
+}
+
+aside h3{
+  font-weight: 500;
+}
+
+aside .sidebar a{
+  display: flex;
+  color: #7d8da1;
+  margin-left: 2rem;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  height: 3.7rem;
+  transition: all 300ms ease;
+}
+
+aside .sidebar a span {
+  font-size: 1.6rem;
+}
+
+/* ---- SIDEBAR LOGOUT ---- */
+
+aside .sidebar a:last-child {
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
+}
+
+aside .sidebar a.active{
+  background: rgba(132, 139, 200, 0.18);
+  color: #111e88;
+  margin-left: 0;
+}
+
+aside .sidebar a.active:before{
+  content: "";
+  width: 6px;
+  height: 100%;
+  background: #111e88;
+}
+
+ aside .sidebar a.active span{
+  color: #111e88;
+  margin-left: calc(1rem - 3px);
+ }
+
+ aside .sidebar a:hover {
+  color: #111e88;
+ }
+
+  aside .sidebar a:hover span{
+  margin-left: 1rem;
+ }
+
+ /* ---- MAIN ---- */
+
+main{
+  margin-top: 1.4rem;
+}
+
+main .date{
+  display: inline-block;
+ /* background: rgba(132, 139, 200, 0.18);*/
+  border-radius: 0.4rem;
+  margin-top: 0.1rem;
+  padding: 0.1rem 1rem;
+}
+
+ /* ---- RIGHT BAR ---- */
+
+ .right {
+  margin-top: 1.4rem;
+ }
+
+ .right .top{
+    display:  flex;
+    justify-content: end;
+    gap: 2rem;
+    /* background: gray; */
+ }
+
+ .right .top button{
+     display: none;
+ }
+
+ .right .theme-toggler{
+  background: rgba(132, 139, 200, 0.18);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 1.6rem;
+  width: 4.2rem;
+  cursor: pointer;
+  border-radius: 0.4rem;
+ }
+
+ .right .theme-toggler span{
+    font-size: 1.2rem;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+
+  .right .theme-toggler span.active{
+    background: #111e88;
+    color: white;
+    border-radius: 0.4rem;
+ }
+
+
+ /* ---- TESTCASe ---- */
+
+
+main .test-case{
+  margin-top: 2rem;
+}
+
+main .test-case h2{
+  margin-bottom: 0.8rem;
+
+}
+
+main .test-case table{
+  background: white;
+  width: 100%;
+  border-radius: 2rem;
+  padding: 1.8rem;
+  text-align: center;
+  box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
+  transition: all 300ms ease;
+}
+
+main .text-case table:hover{
+  box-shadow: none;
+}
+
+main .login-user{
+  margin-top: 2rem;
+  width: 100%;
+  text-align: center;
+  width: 382px;  
+  overflow: hidden;  
+  margin: auto;  
+  margin: 20 0 0 450px;  
+  padding: 80px;   
+  border-radius: 15px ;
+}
+
+main .login-user h2{
+  margin-bottom: 0.8rem;
+  text-align: center;    
+  padding: 20px; 
+}
+
+main .label{  
+    color: #08ffd1;  
+    font-size: 17px;  
+}
+
+#Uname{  
+    width: 300px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 3px;  
+    padding-left: 8px;  
+}  
+#Pass{  
+    width: 300px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 3px;  
+    padding-left: 8px;  
+      
+} 
+
+#log{  
+    width: 300px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 17px;  
+    padding-left: 7px;  
+    color: blue;  
+  
+  
+}    
+
+
+ /* ---- LOGIN ---- */
+
+ /* ---- MEDIA QUERIES ---- 
+
+ @media screen and (max-width: 1200px){
+    .container{
+      width: 94%
+      grid-template-columns: 7rem auto 23rem;
+    }
+ }
+
+ */
