@@ -8,11 +8,11 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('login/', views.login_user, name='login_user'),
 
-    path('config-id/', views.notepad_config_id, name='notepad_config_id'),
+    path('config-id/', views.Testline, name='Testline'),
     # can add-to-favorites only if logged in
-    path('add-to-favorites/<int:notepad_config_id>/', views.add_to_favorites, name="add_to_favorites"),
-    path('config-id/<int:notepad_config_id>/', views.id_notepad, name='id_notepad'),
-    path('config-id/<int:notepad_config_id>/<int:notepad_id>/', views.notepad_details, name='notepad_details'),
+    path('add-to-favorites/<int:notepad_config_id>/', views.add_favorites_TestLine, name="add_favorites_TestLine"),
+    path('config-id/<int:notepad_config_id>/', views.Testrun, name='Testrun'),
+    path('config-id/<int:notepad_config_id>/<int:notepad_id>/', views.Testcase, name='Testcase'),
 
     # if the user logged in => show his profile
     path('profile/', views.user_profile, name="userProfile"),

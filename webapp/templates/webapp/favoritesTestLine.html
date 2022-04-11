@@ -11,7 +11,7 @@
             <br>
             {% for favs in favs_id %}
                 <li class="list-group-item"> {{ forloop.counter }}.
-                    <a href="{% url 'id_notepad' favs.id %}">{{ favs.id }}</a>
+                    <a href="{% url 'Testrun' favs.id %}">{{ favs.id }}</a>
                     <a href="{% url 'delete_favorites_TestLine' favs.id %}">Delete</a>
                 </li>
             {% endfor %}

@@ -12,7 +12,7 @@
                     <li class="list-group-item active text-center font-weight-bold">Testrun ids</li>
                     {% for columns in TestRun_filtered_data %}
                         <li class="list-group-item">{{ forloop.counter }}.
-                            <a href="{% url 'notepad_details' notepad_config_id columns.id%}">{{ columns.id }}</a>
+                            <a href="{% url 'Testcase' notepad_config_id columns.id%}">{{ columns.id }}</a>
                         </li>
                     {% endfor %}
                 </ul>

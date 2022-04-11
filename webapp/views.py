@@ -81,12 +81,12 @@ def delete_favorites_TestLine(request, notepad_config_id):
     select = TestLine.users.through.objects.filter(testline_id = notepad_config_id, user_id = request.user.id)
     select.delete()
     
-    return redirect('favoritesTestLine')
+    return redirect('favorites')
 
 
-def notepad_config_id(request):
-    print("! notepad_config_id !")
-    print("numele user-ului:")
+def Testline(request):
+    print("! Testline !")
+    print("nume user:")
     print(request.user)
 
     TestLine_data = TestLine.objects.all()
@@ -94,16 +94,16 @@ def notepad_config_id(request):
     context = {'dataTestLine' : TestLine_data, 'userName' : str(request.user)}
     return render(request, 'webapp/TestLine.html', context)
 
-def add_to_favorites(request, notepad_config_id):
-    print("# add_to_favorites #")
+def add_favorites_TestLine(request, notepad_config_id):
+    print("# add_favorites_TestLine #")
 
-    # INTREBARE: aparent merge dar nu-mi dau seama exact unde se intampla fiecare bucata din logica.
     testline = TestLine.objects.get(id = notepad_config_id)
     # filter() - returns a QuerySet even if only one object is found.
     # get() - returns just one single model instance.
     print("id-ul care a fost adaugat la favorite de catre user-ul logat:")
     print(testline)
 
+    # INTREBARE: aparent merge dar nu-mi dau seama exact unde se intampla fiecare bucata din logica.
     testline.users.add(request.user)
     # INTREBARE: nu-mi dau seama ce face save(), cu/fara tot aia e.
     # testline.save()
@@ -111,11 +111,11 @@ def add_to_favorites(request, notepad_config_id):
     print("toti userii care au adaugat la favorite id-ul respectiv:")
     print(testline.users.all())
 
-    return redirect('favoritesTestLine')
+    return redirect('favorites')
 
 
-def id_notepad(request, notepad_config_id):
-    print("( id_notepad )")
+def Testrun(request, notepad_config_id):
+    print("( Testrun )")
 
     # when the user tries manually to put a random number in the path of the page
     if not TestLine.objects.filter(id = notepad_config_id).exists():
@@ -126,8 +126,8 @@ def id_notepad(request, notepad_config_id):
     return render(request, 'webapp/TestRun.html', {'TestRun_filtered_data' : TestRun_filtered_data, 'notepad_config_id' : notepad_config_id})
 
 # ordinea parametrilor nu conteaza, ci trebuie sa aiba aceleasi denumiri cu cele din path si sa fie in acelasi numar
-def notepad_details(request, notepad_config_id, notepad_id):
-    print("* notepad_details *")
+def Testcase(request, notepad_config_id, notepad_id):
+    print("* Testcase *")
 
     print("notepad_config_id:")
     print(notepad_config_id)
@@ -139,5 +139,6 @@ def notepad_details(request, notepad_config_id, notepad_id):
         print("NU EXISTA")
         return HttpResponseNotFound("THIS ID DOES NOT EXIST")
 
-    TestCase_data = TestCase.objects.filter(test_run = notepad_id)  # select the data from the table where each test_run has the id of the notepad
+    # select data from table where each TestCase has the id of TestRun
+    TestCase_data = TestCase.objects.filter(test_run = notepad_id)
     return render(request, 'webapp/TestCase.html', {'dataTestCase' : TestCase_data})
