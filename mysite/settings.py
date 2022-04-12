@@ -17,12 +17,9 @@ import environ
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Initialize environment variables
-env = environ.Env(
-    # set casting, default value
-    DEBUG=(bool, False)
-)
+env = environ.Env()
 
-# Take environment variables from .env file
+# read the .env file
 environ.Env.read_env()
 
 
@@ -47,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',  # to restart the database
     'webapp.apps.WebappConfig',  # folderul.apps.clasa_din_folderul_webapp_din_fila_apps.py
 ]
 
