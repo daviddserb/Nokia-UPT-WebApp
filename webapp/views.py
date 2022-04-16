@@ -2,20 +2,22 @@ from django.shortcuts import render, redirect
 from django.contrib import messages  # pop-up messages
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseNotFound
-
 from webapp.models import TestLine, TestRun, TestCase
 from .forms import RegisterUserForm
 
+
 def home(request):
     return render(request, 'webapp/home.html')
+
 
 def register(request):
     # form = RegisterUserForm(None or request.POST)
     form = RegisterUserForm()
     if request.method == 'POST':
-        form = RegisterUserForm(request.POST) # create a new form that has the data from the html form post request
-        
-        # verifica daca fiecare camp din form este valid, pentru clasa Django Form. Daca datele sunt valide, se salveaza in atributul cleaned_data
+        form = RegisterUserForm(request.POST)
+
+        # verifica daca fiecare camp din form este valid pt. clasa Django Form.
+        # daca datele sunt valide, se salveaza in atributul cleaned_data.
         if form.is_valid():
             # save user in the django database (auth_user)
             form.save()
@@ -29,17 +31,18 @@ def register(request):
 
             return redirect('login_user')
 
-    context = {'form' : form}
+    context = {'form': form}
     return render(request, 'webapp/register.html', context)
+
 
 def login_user(request):
     if request.method == 'POST':
-        
+
         # get data from html
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = authenticate(request, username = username, password = password)
+        user = authenticate(request, username=username, password=password)
 
         # check if the user is in the database
         if user is not None:
@@ -50,40 +53,45 @@ def login_user(request):
 
     return render(request, 'webapp/login.html')
 
+
 def logout_user(request):
     logout(request)
     return redirect('home')
 
+
 def user_profile(request):
     print("! user_profile !")
-    context = {'userInfo' : request.user}
+    context = {'userInfo': request.user}
     return render(request, 'webapp/userProfile.html', context)
+
 
 def favorites_TestLine(request):
     print("@ favorites @")
 
-    #filtrez din interm dar extrag di ntestline
-    favorites_id = TestLine.objects.filter(users = request.user)
+    # filtrez din interm dar extrag di ntestline
+    favorites_id = TestLine.objects.filter(users=request.user)
     print("toate id-urile adaugate la favorite de user-ul logat")
     print(favorites_id)
 
-    context = {'favs_id' : favorites_id}
+    context = {'favs_id': favorites_id}
     return render(request, 'webapp/favoritesTestLine.html', context)
+
 
 def delete_favorites_TestLine(request, notepad_config_id):
     print(" @ delete_favorites_TestLine @")
+
     """
     many to many field instance: NameTableWithManyToManyField.NameReferencedTable
     intermediary table model: NameTableWithManyToManyField.NameReferencedTable.through
     intermediary model manager: NameTableWithManyToManyField.NameReferencedTable.through.objects
     return a queryset for all intermediary models: NameTableWithManyToManyField.NameReferencedTable.through.objects.all()
     """
+    # select = TestLine.users.through.objects.filter(testline_id = notepad_config_id, user_id = request.user.id)
+    # select.delete()
 
-    #select = TestLine.users.through.objects.filter(testline_id = notepad_config_id, user_id = request.user.id)
-    testline = TestLine.objects.filter(id = notepad_config_id).first()
+    testline = TestLine.objects.filter(id=notepad_config_id).first()
     testline.users.remove(request.user)
-    #select.delete()
-    
+
     return redirect('favorites')
 
 
@@ -94,19 +102,19 @@ def Testline(request):
 
     TestLine_data = TestLine.objects.all()
 
-    context = {'dataTestLine' : TestLine_data, 'userName' : str(request.user)}
+    context = {'dataTestLine': TestLine_data, 'userName': str(request.user)}
     return render(request, 'webapp/TestLine.html', context)
+
 
 def add_favorites_TestLine(request, notepad_config_id):
     print("# add_favorites_TestLine #")
 
-    testline = TestLine.objects.get(id = notepad_config_id)
+    testline = TestLine.objects.get(id=notepad_config_id)
     # filter() - returns a QuerySet even if only one object is found.
     # get() - returns just one single model instance.
     print("id-ul care a fost adaugat la favorite de catre user-ul logat:")
     print(testline)
 
-    # INTREBARE: aparent merge dar nu-mi dau seama exact unde se intampla fiecare bucata din logica.
     testline.users.add(request.user)
 
     print("toti userii care au adaugat la favorite id-ul respectiv:")
@@ -119,14 +127,17 @@ def Testrun(request, notepad_config_id):
     print("( Testrun )")
 
     # when the user tries manually to put a random number in the path of the page
-    if not TestLine.objects.filter(id = notepad_config_id).exists():
+    if not TestLine.objects.filter(id=notepad_config_id).exists():
         return HttpResponseNotFound("THIS ID DOES NOT EXIST")
 
-    TestRun_filtered_data = TestRun.objects.filter(test_line = notepad_config_id)
+    TestRun_filtered_data = TestRun.objects.filter(test_line=notepad_config_id)
 
-    return render(request, 'webapp/TestRun.html', {'TestRun_filtered_data' : TestRun_filtered_data, 'notepad_config_id' : notepad_config_id})
+    context = {'TestRun_filtered_data': TestRun_filtered_data, 'notepad_config_id': notepad_config_id}
+    return render(request, 'webapp/TestRun.html', context)
 
-# ordinea parametrilor nu conteaza, ci trebuie sa aiba aceleasi denumiri cu cele din path si sa fie in acelasi numar
+
+# ordinea parametrilor nu conteaza
+# trebuie sa aiba aceleasi denumiri cu cele din path si sa fie in acelasi numar
 def Testcase(request, notepad_config_id, notepad_id):
     print("* Testcase *")
 
@@ -136,10 +147,12 @@ def Testcase(request, notepad_config_id, notepad_id):
     print(notepad_id)
 
     # when the user tries manually to put a random number in the path of the page
-    if not TestRun.objects.filter(id = notepad_id).exists():
+    if not TestRun.objects.filter(id=notepad_id).exists():
         print("NU EXISTA")
         return HttpResponseNotFound("THIS ID DOES NOT EXIST")
 
     # select data from table where each TestCase has the id of TestRun
-    TestCase_data = TestCase.objects.filter(test_run = notepad_id)
-    return render(request, 'webapp/TestCase.html', {'dataTestCase' : TestCase_data})
+    TestCase_data = TestCase.objects.filter(test_run=notepad_id)
+
+    context = {'dataTestCase': TestCase_data}
+    return render(request, 'webapp/TestCase.html', context)

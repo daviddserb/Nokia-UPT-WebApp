@@ -1,18 +1,22 @@
 from django.db import models
 from django.contrib.auth.models import User  # db.sqlite3/auth_user
 
+
 # models.Model = clasa trebuie salvata in baza de date
 class TestLine(models.Model):
-    id = models.IntegerField(primary_key=True)  # id-ul din notepad, de dupa '-v REGISTER'
+    id = models.IntegerField(primary_key=True)  # id-ul '-v REGISTER'
     users = models.ManyToManyField(User)
 
+
 class TestRun(models.Model):
-    id = models.IntegerField(primary_key=True)  # id-ul de la numele notepad-ului
+    id = models.IntegerField(primary_key=True)  # notepad id
 
     """
     ForeignKey = face legatura cu toata tabela, nu doar cu o anumita coloana
-    on_delete.CASCADE = cand clasa/obiectul la care ForeignKey face referinta este sters => se sterg si obiectele care au referinte la acesta
-    (ex: cand stergi o pastare de blog, ar fi normal sa se stearga si comentariile de la acea postare)
+
+    on_delete.CASCADE = cand clasa la care FK face referinta este stearsa
+    => se sterg si obiectele care au referinte la acesta
+    (cand stergi o pastare, este normal sa se stearga si comentariile)
     """
     test_line = models.ForeignKey(TestLine, on_delete=models.CASCADE)
 
