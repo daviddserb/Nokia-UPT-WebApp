@@ -37,43 +37,14 @@
                         <!-- MEMBERS LOGIN -->
                     </div>
                 </aside>
+
                 <main>
-                    <div class="date">
-                        <p>This page loaded in <span id="loadtime"></span></p>.
-                    </div>
-
-                    <div class="login-user">
-                        <span class="material-icons-sharp">account_circle</span>
-                        <h2>Welcome {{ request.user }} </h2></a>
-                        <div class="account-dialog">
-                            <div class="card-header bg-primary text-white"> Please sign in </div>
+                    <div id="container-404">
+                        <div class="content-404">
+                            <h2>404</h2>
+                            <h4> Opps! Page not found</h4>
+                            <p>The page you were looking for doesn't exist. You may mistyped the address or the page may have moved.</p>
                         </div>
-                    </div>
-
-                    <div class="d-flex justify-content-center form_container">
-                        <form method="POST" action="">
-                            {% csrf_token %}
-
-                            <div class="input-group mb-3">
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span> <!-- username icon-->
-                                </div>
-
-                                <input type="text" name="username" placeholder="Username..." class="form-control">
-                            </div>
-
-                            <div class="input-group mb-2">
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-key"></i></span> <!-- password icon-->
-                                </div>
-
-                                    <input type="password" name="password" placeholder="Password..." class="form-control" >
-                            </div>
-
-                                <div class="d-flex justify-content-center mt-3 login_container">
-                                    <input class="btn login_btn" type="submit" value="Log in">
-                                </div>
-                        </form>
                     </div>
                 </main>
 
@@ -83,16 +54,18 @@
                             <span class="material-icons-sharp">menu</span>
                         </button>
                         <div class="theme-toggler">
-                            <span class="material-icons-sharp active">light_mode</span> 
+                        <span class="material-icons-sharp active">light_mode</span> 
                             <span class="material-icons-sharp">dark_mode</span> 
                         </div>
                         <div class="profile">
                             <div class="info">
-                                <p> Hey, <b> {{request.user}} </b></p>
-                            </div>
+                                <p> Hey, <b> anonymus </b></p>
+                                <small class="danger">Unknown</small>
+                            </div>                  
                         </div>
                     </div>
                 </div>
+
             </div>
         {% endblock %}
     </body>

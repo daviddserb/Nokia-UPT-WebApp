@@ -80,14 +80,16 @@ def favorites_TestLine(request):
 def delete_favorites_TestLine(request, notepad_config_id):
     print(" @ delete_favorites_TestLine @")
 
+    # testline = TestLine.objects.all().delete() -> to delete all (NU AM NEVOIE)
+
     """
     many to many field instance: NameTableWithManyToManyField.NameReferencedTable
     intermediary table model: NameTableWithManyToManyField.NameReferencedTable.through
     intermediary model manager: NameTableWithManyToManyField.NameReferencedTable.through.objects
     return a queryset for all intermediary models: NameTableWithManyToManyField.NameReferencedTable.through.objects.all()
+    select = TestLine.users.through.objects.filter(testline_id = notepad_config_id, user_id = request.user.id)
+    select.delete()
     """
-    # select = TestLine.users.through.objects.filter(testline_id = notepad_config_id, user_id = request.user.id)
-    # select.delete()
 
     testline = TestLine.objects.filter(id=notepad_config_id).first()
     testline.users.remove(request.user)

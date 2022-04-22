@@ -3,7 +3,7 @@ import re
 from webapp.models import TestLine, TestRun, TestCase
 
 
-def insert_db():
+def insert_logs():
     folder_to_view = "webapp/logs"
     keywords = ["| PASS |", "| FAIL |"]
     keyword = [" -v CONFIGURATION"]
@@ -26,9 +26,9 @@ def insert_db():
                     print(config_id)
 
                 if any(i in line for i in keywords):
-                    line_date.append(re.search("\[ (.*?) \,", line).group(1))
-                    line_name.append(re.search("\] (.*?) \|", line).group(1))
-                    line_status.append(re.search("\| (.*?) \|", line).group(1))
+                    line_date.append(re.search("\[(.*?)\,", line).group(1))
+                    line_name.append(re.search("\](.*?)\|", line).group(1))
+                    line_status.append(re.search("\|(.*?)\|", line).group(1))
 
         TestLine_insert = TestLine(
             id = config_id
