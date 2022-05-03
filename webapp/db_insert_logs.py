@@ -11,8 +11,8 @@ def insert_logs():
     for file_name in os.listdir(folder_to_view):
         # if file_name.endswith(".txt"): # extra, daca o sa am nevoie
         id_notepad = file_name.rpartition('.')[0]
-        # print("id_notepad:")
-        # print(id_notepad)
+        print("id_notepad:")
+        print(id_notepad)
 
         with open("webapp/logs/" + file_name, encoding="utf8") as fin:
             line_date = []
@@ -29,6 +29,14 @@ def insert_logs():
                     line_date.append(re.search("\[(.*?)\,", line).group(1))
                     line_name.append(re.search("\](.*?)\|", line).group(1))
                     line_status.append(re.search("\|(.*?)\|", line).group(1))
+
+        print("toate 'config id' curente din baza de date:")
+        print(TestLine.objects.all())
+
+        if not TestLine.objects.filter(id=config_id).exists():
+            print("NU EXISTA IN BAZA DE DATE")
+        else:
+            print("EXISTA DEJA IN BAZA DE DATE")
 
         TestLine_insert = TestLine(
             id = config_id

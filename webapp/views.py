@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages  # pop-up messages
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseNotFound
 from webapp.models import TestLine, TestRun, TestCase
 from .forms import RegisterUserForm
 
@@ -130,7 +129,8 @@ def Testrun(request, notepad_config_id):
 
     # when the user tries manually to put a random number in the path of the page
     if not TestLine.objects.filter(id=notepad_config_id).exists():
-        return HttpResponseNotFound("THIS ID DOES NOT EXIST")
+        print("NU EXISTA")
+        return render(request, 'webapp/404.html')
 
     TestRun_filtered_data = TestRun.objects.filter(test_line=notepad_config_id)
 
@@ -151,7 +151,7 @@ def Testcase(request, notepad_config_id, notepad_id):
     # when the user tries manually to put a random number in the path of the page
     if not TestRun.objects.filter(id=notepad_id).exists():
         print("NU EXISTA")
-        return HttpResponseNotFound("THIS ID DOES NOT EXIST")
+        return render(request, 'webapp/404.html')
 
     # select data from table where each TestCase has the id of TestRun
     TestCase_data = TestCase.objects.filter(test_run=notepad_id)
