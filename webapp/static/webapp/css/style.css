@@ -461,7 +461,7 @@ main .label{
 
  @media screen and (max-width: 1200px){
     .container{
-      width: 94%
+      width: 94%;
       grid-template-columns: 7rem auto 23rem;
     }
 
@@ -514,10 +514,9 @@ main .label{
  /* ---- MEDIA QUERIES Smarthpone ---- */
 
 
-@media screen and (max-width: 768px) 
-{
+@media screen and (max-width: 768px) {
     .container{
-      width: 100%
+      width: 100%;
       grid-template-columns: 1fr;
     }
 
@@ -528,7 +527,7 @@ main .label{
     	width: 18rem;
     	z-index: 3;
     	box-shadow: 1rem 3rem 4rem var(--color-light);
-    	height: 100vh
+    	height: 100vh;
     	padding-right: var(--card-padding);
       display: none;
       animation: showMenu 400ms ease forwards;
@@ -584,7 +583,7 @@ main .label{
     }
 
     .right {
-      width: 94%
+      width: 94%;
       margin: 0 auto 4rem;
     }
 
@@ -647,7 +646,6 @@ main #container-404 .content-404 h2{
   font-size: 18vw;
   color: var(--color-dark);
   line-height: 1em;
-
 }
 
 main #container-404 .content-404 h4{
@@ -659,11 +657,10 @@ main #container-404 .content-404 h4{
  font-weight: 300;
  padding: 10px 20px;
  display: inline-block;
-
 }
 
-main #container-404 .content-404 p{
- color: var(--color-dark);
- font-size: 1.2em;
- 
+  main #container-404 .content-404 p{
+  color: var(--color-dark);
+  font-size: 1.2em;
+  }
 }

@@ -156,5 +156,21 @@ def Testcase(request, notepad_config_id, notepad_id):
     # select data from table where each TestCase has the id of TestRun
     TestCase_data = TestCase.objects.filter(test_run=notepad_id)
 
+    """
+    difference between .filter(A, B) VS filter(A).filter(B):
+    
+    - to extract all blogs from 2008 AND who have "Lennon" as title: .filter(title='Lennon', year=2008).
+    - to extract all blogs from 2008 OR who have "Lennon" as title: .filter(title='Lennon').filter(year=2008).
+    
+    - so .filter(A, B) will first filter EVERYTHING according to A and then subfilter (filter again the RESULT) according to B.
+    - while .filter(A).filter(B) will filter EVERYTHING according to A and have a result, and then filter again EVERYTHING and have another result, which may not corespond to the A condition.
+    """
+    print("TOTAL:")
+    print(TestCase_data.count())
+    print("PASS:")
+    print(TestCase_data.filter(status='PASS').count())
+    print("FAIL:")
+    print(TestCase_data.filter(status='FAIL').count())
+
     context = {'dataTestCase': TestCase_data}
     return render(request, 'webapp/TestCase.html', context)

@@ -1,4 +1,5 @@
-     var before_loadtime = new Date().getTime();  
+     var before_loadtime = new Date().getTime();
+     console.log("###############")
      window.onload = Pageloadtime;  
      function Pageloadtime() {  
          var aftr_loadtime = new Date().getTime();  

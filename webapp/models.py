@@ -4,7 +4,7 @@ from django.contrib.auth.models import User  # db.sqlite3/auth_user
 
 # models.Model = clasa trebuie salvata in baza de date
 class TestLine(models.Model):
-    id = models.IntegerField(primary_key=True)  # id-ul '-v REGISTER'
+    id = models.IntegerField(primary_key=True)  # id-ul '-v CONFIGURATION'
     users = models.ManyToManyField(User)
 
 
