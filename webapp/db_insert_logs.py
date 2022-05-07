@@ -30,18 +30,19 @@ def insert_logs():
                     line_name.append(re.search("\](.*?)\|", line).group(1))
                     line_status.append(re.search("\|(.*?)\|", line).group(1))
 
-        print("toate 'config id' curente din baza de date:")
-        print(TestLine.objects.all())
-
-        if not TestLine.objects.filter(id=config_id).exists():
-            print("NU EXISTA IN BAZA DE DATE")
-        else:
-            print("EXISTA DEJA IN BAZA DE DATE")
-
         TestLine_insert = TestLine(
             id = config_id
         )
         TestLine_insert.save()
+
+        if not TestRun.objects.filter(id=id_notepad).exists():
+            print("NU EXISTA IN BAZA DE DATE")
+        else:
+            print("EXISTA DEJA IN BAZA DE DATE")
+            # if the notepad already exists in the database, because it can have changes (that means only extra lines)
+            # instead of comparing the lines between them, to see which one is the different one, because we have to add it if so
+            # we can delete all the previous lines from the current notepad and add the new ones from the updated notepad.
+            TestRun.objects.filter(id=id_notepad).delete()
 
         TestRun_insert = TestRun(
             id = id_notepad,

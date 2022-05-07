@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_extensions',  # to restart the database
     'webapp.apps.WebappConfig',  # folderul.apps.clasa_din_folderul_webapp_din_fila_apps.py
+    'django_extensions',  # to restart the database
 ]
 
 MIDDLEWARE = [

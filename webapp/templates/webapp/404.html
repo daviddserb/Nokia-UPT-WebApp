@@ -21,21 +21,35 @@
                         </div>
                     </div>
                     <!-- ELEMENTS NAVBAR-->
-                    <div class="sidebar">
+                    {% if request.user.is_anonymous == True %}
+                        <div class="sidebar">
+                            <a href="{% url 'Testline' %}">
+                                <span class="material-icons-sharp">assessment</span>
+                                <h3>Testlines</h3>
+                            </a>
+                            <a href="{% url 'register' %}">
+                                <span class="material-icons-sharp">how_to_reg</span>
+                                <h3>Register</h3>
+                            </a>
+                            <a href="{% url 'login_user' %}">
+                                <span class="material-icons-sharp">account_circle</span>
+                                <h3>Login</h3>
+                            </a>
+                        </div>
+                    {% else %}
                         <a href="{% url 'Testline' %}">
                             <span class="material-icons-sharp">assessment</span>
                             <h3>Testlines</h3>
                         </a>
-                        <a href="{% url 'register' %}">
+                        <a href="{% url 'favorites' %}">
                             <span class="material-icons-sharp">how_to_reg</span>
-                            <h3>Register</h3>
+                            <h3>Favorites Testlines</h3>
                         </a>
-                        <a href="{% url 'login_user' %}">
+                        <a href="{% url 'logout' %}">
                             <span class="material-icons-sharp">account_circle</span>
-                            <h3>Login</h3>
+                            <h3>Logout</h3>
                         </a>
-                        <!-- MEMBERS LOGIN -->
-                    </div>
+                    {% endif %}
                 </aside>
 
                 <main>
@@ -59,8 +73,7 @@
                         </div>
                         <div class="profile">
                             <div class="info">
-                                <p> Hey, <b> anonymus </b></p>
-                                <small class="danger">Unknown</small>
+                                <p> Hey, <b> {{ request.user }} </b></p>
                             </div>                  
                         </div>
                     </div>
