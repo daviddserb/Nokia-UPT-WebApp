@@ -138,16 +138,12 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-# Celery Broker - Redis (# 6379)
-# CELERY_BROKER_URL = 'redis://localhost:6379'
-# CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+# Celery Broker - Redis
+CELERY_BROKER_URL = 'redis://localhost:6379'
 
 # for Celery ->
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'django-cache'
-
-# celery setting.
-CELERY_CACHE_BACKEND = 'default'
 
 # django setting.
 CACHES = {
@@ -156,5 +152,3 @@ CACHES = {
         'LOCATION': 'my_cache_table',
     }
 }
-
-# <-

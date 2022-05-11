@@ -23,11 +23,11 @@ def debug_task(self):
 
 app.conf.beat_schedule = {
     # numele task-ului periodic
-    'add-every-30-seconds': {
+    'add-every-10-seconds': {
         # path-ul catre functia care sa se repete
-        'task': 'webapp.tasks.task_print',
+        'task': 'webapp.tasks.insert_logs',
         # din cat in cat timp vrei sa se repete
-        'schedule': 30.0
+        'schedule': 10.0
         # pasarea parametrilor la functia (task_print) din 'task'
         # 'args': (16, 16)
     }

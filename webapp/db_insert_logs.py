@@ -52,7 +52,7 @@ def insert_logs():
 
         for i in range(len(line_status)):
             TestCase_insert = TestCase(
-                status = line_status[i],
+                status = line_status[i].strip(),
                 case_name = line_name[i],
                 execution_time = line_date[i],
                 test_run = TestRun.objects.get(id = id_notepad)

@@ -165,6 +165,7 @@ def Testcase(request, notepad_config_id, notepad_id):
     - so .filter(A, B) will first filter EVERYTHING according to A and then subfilter (filter again the RESULT) according to B.
     - while .filter(A).filter(B) will filter EVERYTHING according to A and have a result, and then filter again EVERYTHING and have another result, which may not corespond to the A condition.
     """
+
     print("TOTAL:")
     print(TestCase_data.count())
     print("PASS:")
