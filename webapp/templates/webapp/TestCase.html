@@ -22,7 +22,6 @@
                             <tr>
                                 <th scope="row">{{ forloop.counter }}</th>
                                 <td>{{ columns.case_name }}</td>
-
                                 {% if columns.status == "FAIL" %}
                                     <td><font color="red">{{ columns.status }}</td></font>
                                 {% else %}

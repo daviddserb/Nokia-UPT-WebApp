@@ -2,8 +2,8 @@ import os
 import re
 from webapp.models import TestLine, TestRun, TestCase
 
-
 def insert_logs():
+    print("SE INTRA IN insert_logs()")
     folder_to_view = "webapp/logs"
     keywords = ["| PASS |", "| FAIL |"]
     keyword = [" -v CONFIGURATION"]
