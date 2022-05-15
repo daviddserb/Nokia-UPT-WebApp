@@ -7,12 +7,21 @@
     </head>
     <body>
         {% block content %}
+        <br>
+        name: '{{ request.user }}'
+        <br>
+        id: '{{ request.user.id }}'
+
             <div class="container w-50">
                 <ul class="list-group">
                     <li class="list-group-item active text-center font-weight-bold">Testrun ids</li>
-                    {% for columns in TestRun_filtered_data %}
+                    {% for columns, i, j in Testcases_details %}
                         <li class="list-group-item">{{ forloop.counter }}.
                             <a href="{% url 'Testcase' notepad_config_id columns.id%}">{{ columns.id }}</a>
+                            {% if isFavorite == "YES" %}
+                                <br> <font color="green">{{ i }}</font> %
+                                <br> <font color="red">{{ j }}</font> %
+                            {% endif %}
                         </li>
                     {% endfor %}
                 </ul>

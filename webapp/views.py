@@ -60,6 +60,7 @@ def logout_user(request):
 
 def user_profile(request):
     print("! user_profile !")
+    # request.user prints only the name (BUT it's not the same as request.user.username), because that's what it only wants to print, but inside it's actually all the information from db
     context = {'userInfo': request.user}
     return render(request, 'webapp/userProfile.html', context)
 
@@ -79,7 +80,7 @@ def favorites_TestLine(request):
 def delete_favorites_TestLine(request, notepad_config_id):
     print(" @ delete_favorites_TestLine @")
 
-    # testline = TestLine.objects.all().delete() -> to delete all (NU AM NEVOIE)
+    # testline = TestLine.objects.all().delete() -> to delete all TestLine (and will delete allso TestRun and TestCase)
 
     """
     many to many field instance: NameTableWithManyToManyField.NameReferencedTable
@@ -110,9 +111,10 @@ def Testline(request):
 def add_favorites_TestLine(request, notepad_config_id):
     print("# add_favorites_TestLine #")
 
-    testline = TestLine.objects.get(id=notepad_config_id)
     # filter() - returns a QuerySet even if only one object is found.
     # get() - returns just one single model instance.
+    testline = TestLine.objects.get(id=notepad_config_id)
+
     print("id-ul care a fost adaugat la favorite de catre user-ul logat:")
     print(testline)
 
@@ -132,14 +134,59 @@ def Testrun(request, notepad_config_id):
         print("NU EXISTA")
         return render(request, 'webapp/404.html')
 
-    TestRun_filtered_data = TestRun.objects.filter(test_line=notepad_config_id)
+    Testruns = TestRun.objects.filter(test_line=notepad_config_id)
+    print(Testruns)
 
-    context = {'TestRun_filtered_data': TestRun_filtered_data, 'notepad_config_id': notepad_config_id}
+    passed = []
+    failed = []
+    for Testrun in Testruns:
+        print(Testrun)
+
+        TestCase_lines = TestCase.objects.filter(test_run_id=Testrun.id)
+        print(TestCase_lines)
+
+        print("TOTAL:")
+        total_tests = TestCase_lines.count()
+        print(TestCase_lines.count())
+
+        print("PASS:")
+        passed_tests = TestCase_lines.filter(status='PASS').count()
+        print(TestCase_lines.filter(status='PASS').count())
+
+        print("FAIL:")
+        failed_tests = TestCase_lines.filter(status='FAIL').count()
+        print(TestCase_lines.filter(status='FAIL').count())
+
+        print((passed_tests / total_tests) * 100)
+        print(format((passed_tests / total_tests) * 100, ".2f"))
+        passed.append(format((passed_tests / total_tests) * 100, ".2f"))
+
+        print((failed_tests / total_tests) * 100)
+        print(format((failed_tests / total_tests) * 100, ".2f"))
+        failed.append(format((failed_tests / total_tests) * 100, ".2f"))
+
+    Testrunes_Testcases = zip(Testruns, passed, failed)
+    
+    isFavorite = "NO"
+    if(str(request.user) != "AnonymousUser"):
+        print("y")
+        # TestLine.users.through.objects.all() (to go through the entire table)
+        # go through the intermediary table (ManyToMany) and search if the logged in user added that testline to his favorites
+        TestLine_users = TestLine.users.through.objects.filter(testline_id=notepad_config_id, user_id=request.user)
+        print(TestLine_users)
+
+        # check if QuerySet is not empty => the logged in user added that testline to his favorites
+        if TestLine_users:
+            print("IS NOT EMPTY")
+            isFavorite = "YES"
+
+    print(isFavorite)
+
+    context = {'Testcases_details': Testrunes_Testcases, 'notepad_config_id': notepad_config_id, 'userName': str(request.user), 'isFavorite': isFavorite}
     return render(request, 'webapp/TestRun.html', context)
 
 
-# ordinea parametrilor nu conteaza
-# trebuie sa aiba aceleasi denumiri cu cele din path si sa fie in acelasi numar
+# ordinea parametrilor nu conteaza, trebuie sa aiba aceleasi denumiri cu cele din path si sa fie in acelasi numar
 def Testcase(request, notepad_config_id, notepad_id):
     print("* Testcase *")
 
@@ -155,6 +202,7 @@ def Testcase(request, notepad_config_id, notepad_id):
 
     # select data from table where each TestCase has the id of TestRun
     TestCase_data = TestCase.objects.filter(test_run=notepad_id)
+    print(TestCase_data)
 
     """
     difference between .filter(A, B) VS filter(A).filter(B):
@@ -165,13 +213,6 @@ def Testcase(request, notepad_config_id, notepad_id):
     - so .filter(A, B) will first filter EVERYTHING according to A and then subfilter (filter again the RESULT) according to B.
     - while .filter(A).filter(B) will filter EVERYTHING according to A and have a result, and then filter again EVERYTHING and have another result, which may not corespond to the A condition.
     """
-
-    print("TOTAL:")
-    print(TestCase_data.count())
-    print("PASS:")
-    print(TestCase_data.filter(status='PASS').count())
-    print("FAIL:")
-    print(TestCase_data.filter(status='FAIL').count())
 
     context = {'dataTestCase': TestCase_data}
     return render(request, 'webapp/TestCase.html', context)

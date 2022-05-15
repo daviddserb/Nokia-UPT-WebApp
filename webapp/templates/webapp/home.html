@@ -1,71 +1,21 @@
 {% extends 'webapp/base.html' %}
-{% load static %}
 
 <!doctype html>
 <html lang="en">
-
     <head>
     </head>
 
     <body>
         {% block content %}
             <div class="container">
-                <!-- SIDEBAR FOR VERTICAL NAVBAR-->
-                <aside>
-                    <div class="top">
-                        <div class="logo">
-                            <img src="{% static 'webapp/images/logo.png' %}">
-                            <h2>Statistic<span class="danger">Test</span></h2>
-                        </div>
-                        <div class="close" id="close-btn">
-                            <span class="material-icons-sharp">close</span>
-                        </div>
-                    </div>
 
-                    <!-- ELEMENTS NAVBAR-->
-                    <div class="sidebar">
-                        <a href="{% url 'Testline' %}">
-                            <span class="material-icons-sharp">assessment</span>
-                            <h3>Testlines</h3>
-                        </a>
-                        <a href="{% url 'register' %}">
-                            <span class="material-icons-sharp">how_to_reg</span>
-                            <h3>Register</h3>
-                        </a>
-                        <a href="{% url 'login_user' %}">
-                            <span class="material-icons-sharp">account_circle</span>
-                            <h3>Login</h3>
-                        </a>
-                        <a href="#"></a>
-                    </div>
-
-                </aside>
-                
                 <main>
                     <div class="date">
                         <p>Loaded in <span id="loadtime"></span></p>
                     </div>
                 </main>
-
-                <div class="right">
-                    <div class="top">
-                        <button id="menu-btn">
-                            <span class="material-icons-sharp">menu</span>
-                        </button>
-                        <div class="theme-toggler">
-                        <span class="material-icons-sharp active">light_mode</span> 
-                            <span class="material-icons-sharp">dark_mode</span> 
-                        </div>
-                        <div class="profile">
-                            <div class="info">
-                                <p> Hey, <b> {{ request.user }} </b></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 
             </div>
         {% endblock %}
     </body>
-    
 </html>

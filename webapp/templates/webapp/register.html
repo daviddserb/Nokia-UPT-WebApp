@@ -10,44 +10,12 @@
     <body>
         {% block content %}
             <div class="container">
-                
-                <!-- SIDEBAR FOR VERTICAL NAVBAR-->
-                <aside>
-                    <div class="top">
-                        <div class="logo">
-                            <img src="{% static 'webapp/images/logo.png' %}">
-                            <h2>Statistic<span class="danger">Test</span></h2>
-                        </div>
-                        <div class="close" id="close-btn">
-                            <span class="material-icons-sharp">close</span>
-                        </div>
-                    </div>
-                    <!-- ELEMENTS NAVBAR-->
-                    <div class="sidebar">
-                        <a href="{% url 'Testline' %}">
-                            <span class="material-icons-sharp">assessment</span>
-                            <h3>Testlines</h3>
-                        </a>
-                        <a href="{% url 'register' %}">
-                            <span class="material-icons-sharp">how_to_reg</span>
-                            <h3>Register</h3>
-                        </a>
-                        <a href="{% url 'login_user' %}">
-                            <span class="material-icons-sharp">account_circle</span>
-                            <h3>Login</h3>
-                        </a>
-                        <!-- MEMBERS LOGIN -->
-                    </div>
-                </aside>
                 <main>
                     <h1>SignUp</h1>
 
                     <div class="login-user">
                         <span class="material-icons-sharp">how_to_reg</span>
                         <h2>Create an account</h2>
-                        <div class="account-dialog">
-                            <div class="card-header bg-primary text-white"> Please sign in </div>
-                        </div>
 
                         <div class="container h-100">
                             <div class="d-flex justify-content-center h-100">
@@ -113,23 +81,6 @@
 
                     </div>
                 </main>
-
-                <div class="right">
-                    <div class="top">
-                        <button id="menu-btn">
-                            <span class="material-icons-sharp">menu</span>
-                        </button>
-                        <div class="theme-toggler">
-                        <span class="material-icons-sharp active">light_mode</span> 
-                            <span class="material-icons-sharp">dark_mode</span> 
-                        </div>
-                        <div class="profile">
-                            <div class="info">
-                                <p> Hey, <b> {{ request.user }} </b></p>
-                            <div>                  
-                        </div>
-                    </div>
-                </div>
             </div>
         {% endblock %}
     </body>
