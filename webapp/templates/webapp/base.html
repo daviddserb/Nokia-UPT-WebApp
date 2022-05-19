@@ -29,7 +29,7 @@
             <div class="sidebar">
                 <a href="{% url 'Testline' %}">
                     <span class="material-icons-sharp">assessment</span>
-                    <h3>Testlines</h3>
+                    <h3>Data</h3>
                 </a>
 
                 {% if request.user.is_anonymous == True %}
@@ -45,7 +45,7 @@
                 {% else %}
                     <a href="{% url 'favorites' %}">
                         <span class="material-icons-sharp">how_to_reg</span>
-                        <h3>Favorites Testlines</h3>
+                        <h3>Favorite tests</h3>
                     </a>
                     
                     <a href="{% url 'logout' %}">
@@ -68,7 +68,7 @@
                 </div>
                 <div class="profile">
                     <div class="info">
-                        <p> Hey, <b> {{ request.user }} </b></p>
+                        <p>Hey,<b>{{ request.user }}</b></p>
                     </div>
                 </div>
             </div>

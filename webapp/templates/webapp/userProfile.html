@@ -8,7 +8,19 @@
     <body>
         {% block content %}
             <div class="container">
-                
+                <main>
+                    <div class="insights">
+                        <div class="analyticsetc">
+                            <span class="material-icons-sharp">analytics</span>
+                            <div class="middle">
+                                <div class="left">
+                                    <h3>Total Testcases</h3>
+                                    <h1>{{ testcases }}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
             </div>
         {% endblock %}
     </body>
