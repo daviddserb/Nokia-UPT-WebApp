@@ -7,6 +7,10 @@
     <body>
         {% block content %}
             <div class="container-fluid">
+                <br>
+                <br>
+                <br>
+                <br>
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
@@ -19,15 +23,15 @@
                     <tbody>
                         {% for columns in dataTestCase %}
                             <tr>
-                                <th scope="row">{{ forloop.counter }}</th>
-                                <td>{{ columns.case_name }}</td>
+                                <th class="text-primary" scope="row">{{ forloop.counter }}</th>
+                                <td class="text-primary">{{ columns.case_name }}</td>
                                 {% if columns.status == "FAIL" %}
                                     <td><font color="red">{{ columns.status }}</td></font>
                                 {% else %}
                                     <td><font color="green">{{ columns.status }}</td></font>
                                 {% endif %}
                                 
-                                <td>{{ columns.execution_time }}</td>
+                                <td class="text-info">{{ columns.execution_time }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

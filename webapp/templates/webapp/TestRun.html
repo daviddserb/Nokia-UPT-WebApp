@@ -8,11 +8,21 @@
     <body>
         {% block content %}
             <div class="container w-50">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
                 <ul class="list-group">
                     <li class="list-group-item active text-center font-weight-bold">Testrun ids</li>
                     {% for columns, i, j in Testcases_details %}
-                        <li class="list-group-item">{{ forloop.counter }}.
-                            <a href="{% url 'Testcase' notepad_config_id columns.id%}">{{ columns.id }}</a>
+                        <li class="list-group-item text-dark">{{ forloop.counter }}.
+                            <a href="{% url 'Testcase' notepad_config_id columns.id%}"  class="text-dark">{{ columns.id }}</a>
                             {% if isFavorite == "YES" %}
                                 <br> <font color="green">{{ i }}</font> %
                                 <br> <font color="red">{{ j }}</font> %

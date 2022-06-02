@@ -11,7 +11,7 @@
         {% block content %}
             <div class="container">
                 <main>
-                    <h1>SignUp</h1>
+                    
 
                     <div class="login-user">
                         <span class="material-icons-sharp">how_to_reg</span>
@@ -20,10 +20,6 @@
                         <div class="container h-100">
                             <div class="d-flex justify-content-center h-100">
                                 <div class="user_card">
-            
-                                    <div class="d-flex justify-content-center">
-                                        <h3 id="form-title">REGISTER ACCOUNT</h3>
-                                    </div>
                                     
                                     <div class="d-flex justify-content-center form_container">
                                         <form method="POST" action="">
@@ -32,7 +28,7 @@
                                             username:
                                             <div class="input-group mb-3">
                                                 <div class="input-group-append">
-                                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                    <span class="input-group-text" ><i class="fas fa-user"></i></span>
                                                 </div>
                                                 {{form.username}}
                                             </div>
@@ -63,14 +59,15 @@
                     
                     
                                             <div class="d-flex justify-content-center mt-3 login_container">
-                                                <input class="btn login_btn" type="submit" value="Register Account">
+                                                <input class="btn btn-primary btn-block" type="submit" value="Register Account">
                                             </div>
                                         </form>
                                     </div>
-                    
+
+                    <hr class="line_nokia">
                                     <div class="mt-4">
-                                        <div class="d-flex justify-content-center links">
-                                            Already have an account? <a href="{% url 'login_user' %}" class="ml-2">Log in</a>
+                                        <div class="col col-xs-12 col-md-12 col-lg-12 mt-1 mb-5">
+                                            Already have an account? <a href="{% url 'login_user' %}" class="btn btn-primary btn-block">Log in</a>
                                         </div>
                                     </div>
                     

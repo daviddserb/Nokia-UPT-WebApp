@@ -19,7 +19,7 @@
             <div class="top">
                 <div class="logo">
                     <img src="{% static 'webapp/images/logo.png' %}">
-                    <h2>Statistic<span class="danger">Test</span></h2>
+                    <h2>Test<span class="danger">Stats</span></h2>
                 </div>
                 <div class="close" id="close-btn">
                     <span class="material-icons-sharp">close</span>
@@ -42,6 +42,7 @@
                             <span class="material-icons-sharp">account_circle</span>
                             <h3>Login</h3>
                         </a>
+                        <a></a>
                 {% else %}
                     <a href="{% url 'favorites' %}">
                         <span class="material-icons-sharp">how_to_reg</span>
@@ -68,11 +69,21 @@
                 </div>
                 <div class="profile">
                     <div class="info">
-                        <p>Hey,<b>{{ request.user }}</b></p>
+                        <p>Hey, <b>{{ request.user }}</b></p>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- FOOTER -->
+
+         <!-- <div class="footer">
+            <p>Copyrights 
+            <script>
+                var CurrentYear = new Date().getFullYear()
+                document.write(CurrentYear)
+            </script>
+            | All rights reserved - Powered by <b>Nokia</b></p>
+          </div>-->
 
         <!-- pop-up messages -->
         {% if messages %}
@@ -86,6 +97,7 @@
         {% block content %}
         {% endblock %}
     </body>
+    
     
     <script src="{% static 'webapp/jvs/index.js' %}"></script> <!-- black/white -->
     <script src="{% static 'webapp/jvs/loadpage.js' %}"></script> <!-- page loaded in ...-->

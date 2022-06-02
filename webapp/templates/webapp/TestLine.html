@@ -11,15 +11,20 @@
         {% block content %}
             <div class="container">
                 <main>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                     <div class="testcase-nokia">
                         <div class="container w-50">
                             <ul class="list-group">
-                                <li class="list-group-item active text-center font-weight-bold">Testline ids</li>
+                                <li class="list-group-item active text-center font-weight-bold ">Testline ids</li>
                                 {% for columns in dataTestLine %}
-                                    <li class="list-group-item"> {{ forloop.counter }}. <a href="{% url 'Testrun' columns.id %}">{{ columns.id }}</a>
+                                    <li class="list-group-item text-dark"> {{ forloop.counter }}. <a href="{% url 'Testrun' columns.id %}" class="text-dark">{{ columns.id }}</a>
                                         <br>
                                         {% if userName != "AnonymousUser" %}
-                                            <a href="{% url 'add_favorites_TestLine' columns.id %}">Add to favorites</a>
+                                            <a href="{% url 'add_favorites_TestLine' columns.id %}" class="text-dark">Add to favorites</a>
                                         {% endif %}
                                     </li>
                                 {% endfor %}
